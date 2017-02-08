@@ -68,14 +68,11 @@ namespace ValTechTests
         [Test]
         public void TestCountNumberOfOffices()
         {
-            IList<IWebElement> offices;
-
             OfficesPage officesPage = new OfficesPage(driver);
-            //Jobs / Careers is the fifth item in the list of Top Level Navigation
+
             officesPage.openPageLink("div.hamburger__flip-container");
             officesPage.waitforAnimation();
             System.Diagnostics.Debug.WriteLine("Number of Offices " + officesPage.numberOfOffices().ToString());
-
         }
 
     }
