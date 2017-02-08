@@ -4,6 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using ValtechPages.PageObjects;
 
 namespace ValTechTests 
 {
@@ -29,56 +30,39 @@ namespace ValTechTests
         [Test]
         public void TestLatestNewsSection()
         {
-            IWebElement headingElement;
-            string heading;
-
-            driver.Navigate().GoToUrl(baseURL);
-            headingElement = driver.FindElement(By.CssSelector("div.news-post__listing-header > header > h2.block-header__heading"));
-            heading = headingElement.Text;
-            Assert.AreEqual("LATEST NEWS", heading);
+            driver.Navigate().GoToUrl(baseURL); 
+            Homepage homepage = new Homepage(driver);
+            Assert.AreEqual("LATEST NEWS",  homepage.newsHeading());
         }
 
         [Test]
         public void TestCasesHeading()
         {
-            IWebElement headingElement;
-            string heading;
+            SitePage casesPage = new SitePage(driver);
+            //Cases is the first item in the list of Top Level Navigation of homepage
+            casesPage.openPageLink("div.navigation__menu__bg > ul > li:nth-child(1)");
 
-            driver.Navigate().GoToUrl(baseURL);
-            //Cases is the first element in the list of Top Level Navigation
-            driver.FindElement(By.CssSelector("div.navigation__menu__bg > ul > li:nth-child(1)")).Click();
-
-            headingElement = driver.FindElement(By.CssSelector("header.page-header > h1"));
-            heading = headingElement.Text;
-            Assert.AreEqual("Work", heading);
+            Assert.AreEqual("Work", casesPage.pageHeading());
         }
 
         [Test]
         public void TestServicesHeading()
         {
-            IWebElement headingElement;
-            string heading;
-
-            driver.Navigate().GoToUrl(baseURL);
+            SitePage servicesPage = new SitePage(driver);
             //Services is the second item in the list of Top Level Navigation
-            driver.FindElement(By.CssSelector("div.navigation__menu__bg > ul > li:nth-child(2)")).Click();
-            headingElement = driver.FindElement(By.CssSelector("header.page-header.article__heading > h1"));
-            heading = headingElement.Text;
-            Assert.AreEqual("Services", heading);
+            servicesPage.openPageLink("div.navigation__menu__bg > ul > li:nth-child(2)");
+
+            Assert.AreEqual("Services", servicesPage.pageHeading());
         }
 
         [Test]
         public void TestJobsHeading()
         {
-            IWebElement headingElement;
-            string heading;
+            SitePage jobsPage = new SitePage(driver);
+            //Jobs / Careers is the fifth item in the list of Top Level Navigation
+            jobsPage.openPageLink("div.navigation__menu__bg > ul > li:nth-child(5)");
 
-            driver.Navigate().GoToUrl(baseURL);
-            //Jobs / Carrers is the fifth item in the list of Top Level Navigation
-            driver.FindElement(By.CssSelector("div.navigation__menu__bg > ul > li:nth-child(5)")).Click();
-            headingElement = driver.FindElement(By.CssSelector("div.page-header > h1"));
-            heading = headingElement.Text;
-            Assert.AreEqual("Careers", heading);
+            Assert.AreEqual("Careers", jobsPage.pageHeading());
         }
 
         [Test]
@@ -86,17 +70,11 @@ namespace ValTechTests
         {
             IList<IWebElement> offices;
 
-            driver.Navigate().GoToUrl(baseURL);
-            //Jobs / Carrers is the fifth item in the list of Top Level Navigation
-            driver.FindElement(By.CssSelector("div.hamburger__flip-container")).Click();
-
-            //wait for sliding animation to finish so shows the offices around the world
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
-            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.CssSelector("p.contactheader")));
-
-            offices = driver.FindElements(By.CssSelector("ul.contactcities > li"));
-
-            System.Diagnostics.Debug.WriteLine("Number of Offices " + offices.Count.ToString());
+            OfficesPage officesPage = new OfficesPage(driver);
+            //Jobs / Careers is the fifth item in the list of Top Level Navigation
+            officesPage.openPageLink("div.hamburger__flip-container");
+            officesPage.waitforAnimation();
+            System.Diagnostics.Debug.WriteLine("Number of Offices " + officesPage.numberOfOffices().ToString());
 
         }
 
