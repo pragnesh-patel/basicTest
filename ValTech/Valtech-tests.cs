@@ -29,8 +29,7 @@ namespace ValTechTests
 
         [Test]
         public void TestLatestNewsSection()
-        {
-            driver.Navigate().GoToUrl(baseURL); 
+        { 
             Homepage homepage = new Homepage(driver);
             Assert.AreEqual("LATEST NEWS",  homepage.newsHeading());
         }
@@ -38,9 +37,10 @@ namespace ValTechTests
         [Test]
         public void TestCasesHeading()
         {
+            Homepage homepage = new Homepage(driver);
             SitePage casesPage = new SitePage(driver);
             //Cases is the first item in the list of Top Level Navigation of homepage
-            casesPage.openPageLink("div.navigation__menu__bg > ul > li:nth-child(1)");
+            casesPage.openPageLink(homepage.casePageMenuItem);
 
             Assert.AreEqual("Work", casesPage.pageHeading());
         }
@@ -48,9 +48,10 @@ namespace ValTechTests
         [Test]
         public void TestServicesHeading()
         {
+            Homepage homepage = new Homepage(driver);
             SitePage servicesPage = new SitePage(driver);
             //Services is the second item in the list of Top Level Navigation
-            servicesPage.openPageLink("div.navigation__menu__bg > ul > li:nth-child(2)");
+            servicesPage.openPageLink(homepage.servicesPageMenuItem);
 
             Assert.AreEqual("Services", servicesPage.pageHeading());
         }
@@ -58,9 +59,10 @@ namespace ValTechTests
         [Test]
         public void TestJobsHeading()
         {
+            Homepage homepage = new Homepage(driver);
             SitePage jobsPage = new SitePage(driver);
             //Jobs / Careers is the fifth item in the list of Top Level Navigation
-            jobsPage.openPageLink("div.navigation__menu__bg > ul > li:nth-child(5)");
+            jobsPage.openPageLink(homepage.jobsPageMenuItem);
 
             Assert.AreEqual("Careers", jobsPage.pageHeading());
         }
@@ -68,9 +70,10 @@ namespace ValTechTests
         [Test]
         public void TestCountNumberOfOffices()
         {
+            Homepage homepage = new Homepage(driver);
             OfficesPage officesPage = new OfficesPage(driver);
 
-            officesPage.openPageLink("div.hamburger__flip-container");
+            officesPage.openPageLink(homepage.officesPageMenuItem);
             officesPage.waitforAnimation();
             System.Diagnostics.Debug.WriteLine("Number of Offices " + officesPage.numberOfOffices().ToString());
         }

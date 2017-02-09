@@ -19,5 +19,10 @@ namespace ValtechTest.PageObjects
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.CssSelector(cssLocation)).Click();
         }
+
+        public void openPageLink(IWebElement menuItem)
+        {
+            menuItem.Click();
+        }
     }
 }

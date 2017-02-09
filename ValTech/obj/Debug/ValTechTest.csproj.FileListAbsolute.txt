@@ -18,3 +18,4 @@ C:\Projects\vtech-test\ValTech\bin\Debug\WebDriver.xml
 C:\Projects\vtech-test\ValTech\bin\Debug\WebDriver.Support.xml
 C:\Projects\vtech-test\ValTech\obj\Debug\ValtechTest.dll
 C:\Projects\vtech-test\ValTech\obj\Debug\ValtechTest.pdb
+C:\Projects\vtech-test\ValTech\obj\Debug\ValTechTest.csprojResolveAssemblyReference.cache
