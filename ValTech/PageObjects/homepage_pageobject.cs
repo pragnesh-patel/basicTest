@@ -20,6 +20,9 @@ namespace ValtechPages.PageObjects
         [FindsBy(How = How.CssSelector, Using = "div.hamburger__flip-container")]
         public IWebElement officesPageMenuItem { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "div.news-post__listing-header > header > h2.block-header__heading")]
+        public IWebElement newsHeadingElement { get; set; }
+
 
         public Homepage(IWebDriver browser):base(browser)
         {
@@ -29,10 +32,7 @@ namespace ValtechPages.PageObjects
         
         public string newsHeading()
         {
-            IWebElement headingElement;
-
-            headingElement = driver.FindElement(By.CssSelector("div.news-post__listing-header > header > h2.block-header__heading"));
-            return headingElement.Text;
+            return newsHeadingElement.Text;
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace ValtechTest.PageObjects
 {
@@ -18,6 +19,7 @@ namespace ValtechTest.PageObjects
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.CssSelector(cssLocation)).Click();
+            PageFactory.InitElements(driver, this);
         }
 
         public void openPageLink(IWebElement menuItem)

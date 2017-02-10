@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using ValtechPages.PageObjects;
@@ -18,7 +19,7 @@ namespace ValTechTests
         [SetUp]
         public void SetupTest()
         {
-            driver = new ChromeDriver(@"C:\selenium\");
+            driver = new ChromeDriver();
         }
 
         [TearDown]
@@ -38,9 +39,8 @@ namespace ValTechTests
         public void TestCasesHeading()
         {
             Homepage homepage = new Homepage(driver);
+            homepage.casePageMenuItem.Click();
             SitePage casesPage = new SitePage(driver);
-            //Cases is the first item in the list of Top Level Navigation of homepage
-            casesPage.openPageLink(homepage.casePageMenuItem);
 
             Assert.AreEqual("Work", casesPage.pageHeading());
         }
@@ -49,9 +49,8 @@ namespace ValTechTests
         public void TestServicesHeading()
         {
             Homepage homepage = new Homepage(driver);
+            homepage.servicesPageMenuItem.Click();
             SitePage servicesPage = new SitePage(driver);
-            //Services is the second item in the list of Top Level Navigation
-            servicesPage.openPageLink(homepage.servicesPageMenuItem);
 
             Assert.AreEqual("Services", servicesPage.pageHeading());
         }
@@ -60,9 +59,8 @@ namespace ValTechTests
         public void TestJobsHeading()
         {
             Homepage homepage = new Homepage(driver);
+            homepage.jobsPageMenuItem.Click();
             SitePage jobsPage = new SitePage(driver);
-            //Jobs / Careers is the fifth item in the list of Top Level Navigation
-            jobsPage.openPageLink(homepage.jobsPageMenuItem);
 
             Assert.AreEqual("Careers", jobsPage.pageHeading());
         }
@@ -71,9 +69,9 @@ namespace ValTechTests
         public void TestCountNumberOfOffices()
         {
             Homepage homepage = new Homepage(driver);
+            homepage.officesPageMenuItem.Click();
             OfficesPage officesPage = new OfficesPage(driver);
 
-            officesPage.openPageLink(homepage.officesPageMenuItem);
             officesPage.waitforAnimation();
             System.Diagnostics.Debug.WriteLine("Number of Offices " + officesPage.numberOfOffices().ToString());
         }
